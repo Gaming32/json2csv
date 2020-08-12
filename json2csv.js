@@ -23,7 +23,7 @@ function json2csv(json) {
     return locateArray(json);
 }
 
-if (module) {
+if (typeof module != "undefined") {
     module.exports = {
         json2csv: json2csv
     };
