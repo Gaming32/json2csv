@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="json2csv.js"></script>
+        <script>
+            function convert() {
+                var inputArea = document.getElementById("input");
+                var outputArea = document.getElementById("output");
+                outputArea.value = json2csv(JSON.parse(inputArea.value));
+            }
+        </script>
+    </head>
+    <body>
+        <textarea id="input">Input Goes Here!</textarea>
+        <br>
+        <button onclick="convert()">Convert!</button>
+        <br>
+        <textarea readonly id="output">Output...</textarea>
+    </body>
+</html>
