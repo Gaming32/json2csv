@@ -14,13 +14,27 @@ function locateArray(data) {
     return null;
 }
 
-function generateFieldObject(array) {
-    var result = {};
+function analyzeKeys(array) {
+    var keys = [];
     for (var obj of array) {
         for (var key in obj) {
+            if (!keys.includes(key))
+                keys.push(key);
+        }
+    }
+    return keys
+}
+
+function generateFieldObject(array, keys) {
+    var result = {};
+    for (var obj of array) {
+        for (var key of keys) {
             if (!(key in result))
                 result[key] = [];
-            result[key].push(obj[key])
+            if (key in obj)
+                result[key].push(obj[key]);
+            else
+                result[key].push("");
         }
     }
     return result;
@@ -50,7 +64,8 @@ function csvFromFieldObject(fieldObject) {
 
 function json2csv(json) {
     var array = locateArray(json);
-    var fieldObject = generateFieldObject(array);
+    var keys = analyzeKeys(array);
+    var fieldObject = generateFieldObject(array, keys);
     return csvFromFieldObject(fieldObject);
 }
 
